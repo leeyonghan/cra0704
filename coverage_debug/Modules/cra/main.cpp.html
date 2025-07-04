@@ -1,0 +1,409 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>main.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+    <body onload="prettyPrint()">
+        <h4></h4>
+        <pre class="prettyprint lang-cpp linenums">
+#ifdef _DEBUG
+
+#include "gmock/gmock.h"
+
+int main()
+<span style = "background-color:#dfd">{
+    testing::InitGoogleMock();
+    return RUN_ALL_TESTS();
+}</span>
+
+#else
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include"define.h"
+#include"Car.h"
+#include"TestProducer.h"
+#include"ValidCheck.h"
+#include"runProducerCar.h"
+#define CLEAR_SCREEN "\033[H\033[2J"
+
+int stack[10];
+
+void selectCarType(int answer);
+void selectEngine(int answer);
+void selectbrakeSystem(int answer);
+void selectSteeringSystem(int answer);
+void runProducedCar();
+void delay(int ms);
+void printStepMessage(int step);
+bool eraseNewlineChar(char* buf);
+bool checkPossibleRange(int step, int answer);
+bool backtoInit(int&amp; step, int answer);
+bool backtoBefore(int&amp; step, int answer);
+void goNextStep(int&amp; step, int answer);
+void getInput(char* buf);
+
+void delay(int ms)
+{
+    volatile int sum = 0;
+    for (int i = 0; i &lt; 1000; i++)
+    {
+        for (int j = 0; j &lt; 1000; j++)
+        {
+            for (int t = 0; t &lt; ms; t++)
+            {
+                sum++;
+            }
+        }
+    }
+}
+
+void printCarTypemenu()
+{
+    printf(CLEAR_SCREEN);
+
+    printf("        ______________\n");
+    printf("       /|            | \n");
+    printf("  ____/_|_____________|____\n");
+    printf(" |                      O  |\n");
+    printf(" '-(@)----------------(@)--'\n");
+    printf("===============================\n");
+    printf("¾î¶² Â÷·® Å¸ÀÔÀ» ¼±ÅÃÇÒ±î¿ä?\n");
+    printf("1. Sedan\n");
+    printf("2. SUV\n");
+    printf("3. Truck\n");
+}
+void printEnginemenu()
+{
+    printf(CLEAR_SCREEN);
+    printf("¾î¶² ¿£ÁøÀ» Å¾ÀçÇÒ±î¿ä?\n");
+    printf("0. µÚ·Î°¡±â\n");
+    printf("1. GM\n");
+    printf("2. TOYOTA\n");
+    printf("3. WIA\n");
+    printf("4. °íÀå³­ ¿£Áø\n");
+}
+void printBreakSystemmenu()
+{
+    printf(CLEAR_SCREEN);
+    printf("¾î¶² Á¦µ¿ÀåÄ¡¸¦ ¼±ÅÃÇÒ±î¿ä?\n");
+    printf("0. µÚ·Î°¡±â\n");
+    printf("1. MANDO\n");
+    printf("2. CONTINENTAL\n");
+    printf("3. BOSCH\n");
+}
+void printSteeringSystemmenu()
+{
+    printf(CLEAR_SCREEN);
+    printf("¾î¶² Á¶ÇâÀåÄ¡¸¦ ¼±ÅÃÇÒ±î¿ä?\n");
+    printf("0. µÚ·Î°¡±â\n");
+    printf("1. BOSCH\n");
+    printf("2. MOBIS\n");
+}
+void printRunTest()
+{
+    printf(CLEAR_SCREEN);
+    printf("¸ÚÁø Â÷·®ÀÌ ¿Ï¼ºµÇ¾ú½À´Ï´Ù.\n");
+    printf("¾î¶² µ¿ÀÛÀ» ÇÒ±î¿ä?\n");
+    printf("0. Ã³À½ È­¸éÀ¸·Î µ¹¾Æ°¡±â\n");
+    printf("1. RUN\n");
+    printf("2. Test\n");
+}
+void printStepMessage(int step)
+{
+    if (step == CarType_Q)
+    {
+        printCarTypemenu();
+    }
+    else if (step == Engine_Q)
+    {
+        printEnginemenu();
+    }
+    else if (step == brakeSystem_Q)
+    {
+        printBreakSystemmenu();;
+    }
+    else if (step == SteeringSystem_Q)
+    {
+        printSteeringSystemmenu();
+    }
+    else if (step == Run_Test)
+    {
+        printRunTest();
+    }
+    printf("===============================\n");
+
+}
+bool eraseNewlineChar(char* buf)
+{
+    char* context = nullptr;
+    strtok_s(buf, "\r", &amp;context);
+    strtok_s(buf, "\n", &amp;context);
+
+    if (!strcmp(buf, "exit"))
+    {
+        printf("¹ÙÀÌ¹ÙÀÌ\n");
+        return false;// break;
+    }
+    return true;
+}
+bool isNumber(char* buf, int &amp;answer)
+{
+    // ¼ýÀÚ·Î µÈ ´ë´äÀÎÁö È®ÀÎ
+
+    char* checkNumber;
+    answer = strtol(buf, &amp;checkNumber, 10); // ¹®ÀÚ¿­À» 10Áø¼ö·Î º¯È¯
+
+    // ÀÔ·Â¹ÞÀº ¹®ÀÚ°¡ ¼ýÀÚ°¡ ¾Æ´Ï¶ó¸é
+    if (*checkNumber != '\0')
+    {
+        printf("ERROR :: ¼ýÀÚ¸¸ ÀÔ·Â °¡´É\n");
+        delay(800);
+        return false;
+    }
+    return true;
+
+}
+int main()
+{
+    char buf[100];
+    int step = CarType_Q;
+    int answer;
+
+    while (1)
+    {
+        // step message Ãâ·Â
+        printStepMessage(step);
+        
+        // input ÀÔ·Â
+        getInput(buf);
+        // ¿£ÅÍ °³Çà¹®ÀÚ Á¦°Å
+        if (eraseNewlineChar(buf) == false)break;
+        
+        // ¼ýÀÚ·Î µÈ ´ë´äÀÎÁö È®ÀÎ
+        if (isNumber(buf, answer) == false)continue;
+        
+        // ¹üÀ§ Ã¼Å©
+        if (checkPossibleRange(step, answer) == false) continue;
+        
+        // Ã³À½À¸·Î µ¹¾Æ°¡±â
+        if (backtoInit(step, answer)) continue;
+
+        // ÀÌÀüÀ¸·Î µ¹¾Æ°¡±â
+        if (backtoBefore(step, answer))continue;
+
+        // ´ÙÀ½ ¸Þ´º ÁøÇà
+        goNextStep(step, answer);
+    }
+}
+
+
+void selectCarType(int answer)
+{
+    stack[CarType_Q] = answer;
+    if (answer == 1)
+        printf("Â÷·® Å¸ÀÔÀ¸·Î SedanÀ» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+    if (answer == 2)
+        printf("Â÷·® Å¸ÀÔÀ¸·Î SUVÀ» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+    if (answer == 3)
+        printf("Â÷·® Å¸ÀÔÀ¸·Î TruckÀ» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+}
+
+void selectEngine(int answer)
+{
+    stack[Engine_Q] = answer;
+    if (answer == 1)
+        printf("GM ¿£ÁøÀ» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+    if (answer == 2)
+        printf("TOYOTA ¿£ÁøÀ» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+    if (answer == 3)
+        printf("WIA ¿£ÁøÀ» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+}
+
+void selectbrakeSystem(int answer)
+{
+    stack[brakeSystem_Q] = answer;
+    if (answer == 1)
+        printf("MANDO Á¦µ¿ÀåÄ¡¸¦ ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+    if (answer == 2)
+        printf("CONTINENTAL Á¦µ¿ÀåÄ¡¸¦ ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+    if (answer == 3)
+        printf("BOSCH Á¦µ¿ÀåÄ¡¸¦ ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+}
+
+void selectSteeringSystem(int answer)
+{
+    stack[SteeringSystem_Q] = answer;
+    if (answer == 1)
+        printf("BOSCH Á¶ÇâÀåÄ¡¸¦ ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+    if (answer == 2)
+        printf("MOBIS Á¶ÇâÀåÄ¡¸¦ ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\n");
+}
+
+void testProducedCar(Car mycar)
+{
+    
+    if (mycar.getCarType() == SEDAN &amp;&amp; mycar.getBrake() == CONTINENTAL)
+    {
+        printf("ÀÚµ¿Â÷ ºÎÇ° Á¶ÇÕ Å×½ºÆ® °á°ú : FAIL\n");
+        printf("Sedan¿¡´Â ContinentalÁ¦µ¿ÀåÄ¡ »ç¿ë ºÒ°¡\n");
+    }
+    else if (mycar.getCarType() == SUV &amp;&amp; mycar.getEngine() == TOYOTA)
+    {
+        printf("ÀÚµ¿Â÷ ºÎÇ° Á¶ÇÕ Å×½ºÆ® °á°ú : FAIL\n");
+        printf("SUV¿¡´Â TOYOTA¿£Áø »ç¿ë ºÒ°¡\n");
+    }
+    else if (mycar.getCarType() == TRUCK &amp;&amp; mycar.getEngine() == WIA)
+    {
+        printf("ÀÚµ¿Â÷ ºÎÇ° Á¶ÇÕ Å×½ºÆ® °á°ú : FAIL\n");
+        printf("Truck¿¡´Â WIA¿£Áø »ç¿ë ºÒ°¡\n");
+    }
+    else if (mycar.getCarType() == TRUCK &amp;&amp; mycar.getBrake() == MANDO)
+    {
+        printf("ÀÚµ¿Â÷ ºÎÇ° Á¶ÇÕ Å×½ºÆ® °á°ú : FAIL\n");
+        printf("Truck¿¡´Â MandoÁ¦µ¿ÀåÄ¡ »ç¿ë ºÒ°¡\n");
+    }
+    else if (mycar.getBrake() == BOSCH_B &amp;&amp; mycar.getSteering() != BOSCH_S)
+    {
+        printf("ÀÚµ¿Â÷ ºÎÇ° Á¶ÇÕ Å×½ºÆ® °á°ú : FAIL\n");
+        printf("BoschÁ¦µ¿ÀåÄ¡¿¡´Â BoschÁ¶ÇâÀåÄ¡ ÀÌ¿Ü »ç¿ë ºÒ°¡\n");
+    }
+    else
+    {
+        printf("ÀÚµ¿Â÷ ºÎÇ° Á¶ÇÕ Å×½ºÆ® °á°ú : PASS\n");
+    }
+}
+
+bool checkPossibleRange(int step, int answer)
+{
+    if (step == CarType_Q &amp;&amp; !(answer &gt;= 1 &amp;&amp; answer &lt;= 3))
+    {
+        printf("ERROR :: Â÷·® Å¸ÀÔÀº 1 ~ 3 ¹üÀ§¸¸ ¼±ÅÃ °¡´É\n");
+        delay(800);
+        return false;
+    }
+
+    if (step == Engine_Q &amp;&amp; !(answer &gt;= 0 &amp;&amp; answer &lt;= 4))
+    {
+        printf("ERROR :: ¿£ÁøÀº 1 ~ 4 ¹üÀ§¸¸ ¼±ÅÃ °¡´É\n");
+        delay(800);
+        return false;
+    }
+
+    if (step == brakeSystem_Q &amp;&amp; !(answer &gt;= 0 &amp;&amp; answer &lt;= 3))
+    {
+        printf("ERROR :: Á¦µ¿ÀåÄ¡´Â 1 ~ 3 ¹üÀ§¸¸ ¼±ÅÃ °¡´É\n");
+        delay(800);
+        return false;
+    }
+
+    if (step == SteeringSystem_Q &amp;&amp; !(answer &gt;= 0 &amp;&amp; answer &lt;= 2))
+    {
+        printf("ERROR :: Á¶ÇâÀåÄ¡´Â 1 ~ 2 ¹üÀ§¸¸ ¼±ÅÃ °¡´É\n");
+        delay(800);
+        return false;
+    }
+
+    if (step == Run_Test &amp;&amp; !(answer &gt;= 0 &amp;&amp; answer &lt;= 2))
+    {
+        printf("ERROR :: Run ¶Ç´Â Test Áß ÇÏ³ª¸¦ ¼±ÅÃ ÇÊ¿ä\n");
+        delay(800);
+        return false;
+    }
+    return true;
+}
+
+bool backtoInit(int&amp; step, int answer)
+{
+    if (answer == 0 &amp;&amp; step == Run_Test)
+    {
+        step = CarType_Q;
+        return true;
+    }
+    return false;
+}
+
+bool backtoBefore(int&amp; step, int answer)
+{
+    if (answer == 0 &amp;&amp; step &gt;= 1)
+    {
+        step -= 1;
+        return true;
+    }
+    return false;
+}
+
+void goNextStep(int&amp; step, int answer)
+{
+    if (step == CarType_Q)
+    {
+        selectCarType(answer);
+        delay(800);
+        step = Engine_Q;
+    }
+    else if (step == Engine_Q)
+    {
+        selectEngine(answer);
+        delay(800);
+        step = brakeSystem_Q;
+    }
+    else if (step == brakeSystem_Q)
+    {
+        selectbrakeSystem(answer);
+        delay(800);
+        step = SteeringSystem_Q;
+    }
+    else if (step == SteeringSystem_Q)
+    {
+        selectSteeringSystem(answer);
+        delay(800);
+        step = Run_Test;
+    }
+    else if (step == Run_Test)
+    {
+        Car mycar(static_cast&lt;SteeringSystem&gt;(stack[SteeringSystem_Q]), static_cast&lt;Engine&gt;(stack[Engine_Q]), static_cast&lt;brakeSystem&gt;(stack[brakeSystem_Q]), static_cast&lt;CarType&gt;(stack[CarType_Q]));
+        if (answer == 1)
+        {
+            RunProducer runproducer;
+            runproducer.runProducedCar(mycar);
+            delay(2000);
+        }
+        else if (answer == 2)
+        {
+            printf("Test...\n");
+            delay(1500);
+            TestProducer CarTest;
+            CarTest.testProducedCar(mycar);
+            delay(2000);
+        }
+        
+    }
+}
+
+void getInput(char* buf)
+{
+    printf("INPUT &gt; ");
+    fgets(buf, sizeof(buf), stdin);
+
+}
+
+#endif</pre>
+        <hr />
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th align="center">
+                        <small>Generated by</small>
+                        <a href="https://github.com/OpenCppCoverage/OpenCppCoverage/releases">
+                            <strong>OpenCppCoverage (Version: 0.9.9.0)</strong>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </body>
+</html>

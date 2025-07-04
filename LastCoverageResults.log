@@ -1,5 +1,5 @@
-[2025-07-04 08:50:49] [info] Start Program:
-Path:".\\x64\\Debug\\cra.exe"
+[2025-07-04 13:55:23] [info] Start Program:
+Path:".\\x64\\Release\\cra.exe"
 Arguments:
 Working directory: not set.
 Modules: Selected: * Excluded: 
@@ -9,23 +9,23 @@ Cover Children: 0
 Aggregate by file: 1
 Continue after C++ exception: 0
 Optimized build support: 0
-Export: html coverage 
+Export: html coverage_release 
 Input coverage: 
 Unified diff: 
 Excluded line regular expressions: 
 Substitute pdb source paths: 
-[2025-07-04 08:50:49] [info] Module: C:\Users\User\source\repos\cra\x64\Debug\cra.exe is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\ntdll.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\kernel32.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\KernelBase.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\ucrtbased.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\msvcp140d.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\vcruntime140_1d.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\vcruntime140d.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\kernel.appcore.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\msvcrt.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] Module: C:\Windows\System32\rpcrt4.dll is selected because it matches selected pattern: *
-[2025-07-04 08:50:49] [info] ----------------------------------------------------
-[2025-07-04 08:50:49] [info] Coverage generated in Folder C:\Users\User\source\repos\cra\coverage
-[2025-07-04 08:50:49] [info] ----------------------------------------------------
-[2025-07-04 08:50:49] [info] The code coverage report is not what you expect? See the FAQ https://github.com/OpenCppCoverage/OpenCppCoverage/wiki/FAQ.
+[2025-07-04 13:55:23] [info] Module: C:\Users\User\source\repos\cra\x64\Release\cra.exe is selected because it matches selected pattern: *
+[2025-07-04 13:55:23] [info] Module: C:\Windows\System32\ntdll.dll is selected because it matches selected pattern: *
+[2025-07-04 13:55:23] [info] Module: C:\Windows\System32\kernel32.dll is selected because it matches selected pattern: *
+[2025-07-04 13:55:23] [info] Module: C:\Windows\System32\KernelBase.dll is selected because it matches selected pattern: *
+[2025-07-04 13:55:23] [info] Module: C:\Windows\System32\ucrtbase.dll is selected because it matches selected pattern: *
+[2025-07-04 13:55:23] [info] Module: C:\Windows\System32\msvcp140.dll is selected because it matches selected pattern: *
+[2025-07-04 13:55:23] [info] Module: C:\Windows\System32\vcruntime140.dll is selected because it matches selected pattern: *
+[2025-07-04 13:55:23] [info] Module: C:\Windows\System32\vcruntime140_1.dll is selected because it matches selected pattern: *
+[2025-07-04 13:57:22] [info] Module: C:\Windows\System32\kernel.appcore.dll is selected because it matches selected pattern: *
+[2025-07-04 13:57:22] [info] Module: C:\Windows\System32\msvcrt.dll is selected because it matches selected pattern: *
+[2025-07-04 13:57:22] [info] Module: C:\Windows\System32\rpcrt4.dll is selected because it matches selected pattern: *
+[2025-07-04 13:57:22] [info] ----------------------------------------------------
+[2025-07-04 13:57:22] [info] Coverage generated in Folder C:\Users\User\source\repos\cra\coverage_release
+[2025-07-04 13:57:22] [info] ----------------------------------------------------
+[2025-07-04 13:57:22] [info] The code coverage report is not what you expect? See the FAQ https://github.com/OpenCppCoverage/OpenCppCoverage/wiki/FAQ.

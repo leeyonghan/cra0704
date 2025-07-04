@@ -124,15 +124,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="runProducerCar.cpp" />
     <ClCompile Include="test.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="TestProducer.cpp" />
+    <ClCompile Include="ValidCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BrakeSystem.h" />
+    <ClInclude Include="Car.h" />
+    <ClInclude Include="CarType.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="Engine.h" />
+    <ClInclude Include="runProducerCar.h" />
+    <ClInclude Include="TestProducer.h" />
+    <ClInclude Include="Steering.h" />
+    <ClInclude Include="ValidCheck.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

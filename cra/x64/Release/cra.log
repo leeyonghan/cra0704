@@ -1,6 +1,6 @@
-﻿  main.cpp
+﻿  test.cpp
   코드를 생성하고 있습니다.
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 2478 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Compiler switch has changed, fall back to full compilation.
+  All 1854 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   코드를 생성했습니다.
   cra.vcxproj -> C:\Users\User\source\repos\cra\x64\Release\cra.exe

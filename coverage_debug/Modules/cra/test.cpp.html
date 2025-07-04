@@ -1,0 +1,450 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <meta charset="utf-8"/>
+	    <title>test.cpp</title>
+	    <link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+    <body onload="prettyPrint()">
+        <h4></h4>
+        <pre class="prettyprint lang-cpp linenums">
+#ifdef _DEBUG
+
+#include "gmock/gmock.h"
+#include"Car.h"
+#include"TestProducer.h"
+<span style = "background-color:#dfd">#include"ValidCheck.h"
+#include"runProducerCar.h"
+TEST(t1, tc1) {</span>
+	EXPECT_EQ(1, 1);
+}
+/*
+
+Type
+Sedan/SUV/Truck
+
+Steering
+Bosch/Mobis
+
+Engine 
+GM/TOYOTA/WIA/Broken
+
+Brake
+MANDO/Continental/Bosch
+
+<span style = "background-color:#dfd">
+*/</span>
+TEST(SEDANTEST, Mobis_GM_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(MOBIS, GM, MANDO, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SUVTEST, Mobis_GM_BOSCH_B)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(MOBIS, GM, BOSCH_B, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+}
+<span style = "background-color:#dfd">
+</span>
+TEST(SEDANTEST, BOSCH_GM_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, GM, MANDO, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SEDANTEST, BOSCH_GM_Continental)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, GM, CONTINENTAL, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+}</span>
+TEST(SEDANTEST, BOSCH_GM_Bosch)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, GM, BOSCH_B, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+}
+<span style = "background-color:#dfd">
+</span>
+TEST(SEDANTEST, BOSCH_TOYOTA_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, TOYOTA, MANDO, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+}
+<span style = "background-color:#dfd">
+</span>
+TEST(SEDANTEST, BOSCH_TOYOTA_CONTINENTAL)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, TOYOTA, CONTINENTAL, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SEDANTEST, BOSCH_TOYOTA_BOSCH)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, TOYOTA, BOSCH_B, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SEDANTEST, BOSCH_WIA_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, WIA, MANDO, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SEDANTEST, BOSCH_WIA_CONTINENTAL)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, WIA, CONTINENTAL, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SEDANTEST, BOSCH_WIA_BOSCH)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, WIA, BOSCH_B, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SEDANTEST, BOSCH_BROKEN_BOSCH)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, BROKEN, BOSCH_B, SEDAN);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+}
+
+<span style = "background-color:#dfd">
+</span>
+TEST(SUVTEST, BOSCH_GM_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, GM, MANDO, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SUVTEST, BOSCH_GM_Continental)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, GM, CONTINENTAL, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+}</span>
+TEST(SUVTEST, BOSCH_GM_Bosch)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, GM, BOSCH_B, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+}
+<span style = "background-color:#dfd">
+</span>
+TEST(SUVTEST, BOSCH_TOYOTA_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, TOYOTA, MANDO, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+}
+<span style = "background-color:#dfd">
+</span>
+TEST(SUVTEST, BOSCH_TOYOTA_CONTINENTAL)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, TOYOTA, CONTINENTAL, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SUVTEST, BOSCH_TOYOTA_BOSCH)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, TOYOTA, BOSCH_B, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SUVTEST, BOSCH_WIA_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, WIA, MANDO, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SUVTEST, BOSCH_WIA_CONTINENTAL)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, WIA, CONTINENTAL, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SUVTEST, BOSCH_WIA_BOSCH)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, WIA, BOSCH_B, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(SUVTEST, BOSCH_BROKEN_BOSCH)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, BROKEN, BOSCH_B, SUV);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+}
+
+
+
+<span style = "background-color:#dfd">
+</span>
+TEST(TRUCKTEST, BOSCH_GM_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, GM, MANDO, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(TRUCKTEST, BOSCH_GM_Continental)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, GM, CONTINENTAL, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+}</span>
+TEST(TRUCKTEST, BOSCH_GM_Bosch)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, GM, BOSCH_B, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+}
+<span style = "background-color:#dfd">
+</span>
+TEST(TRUCKTEST, BOSCH_TOYOTA_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, TOYOTA, MANDO, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+}
+<span style = "background-color:#dfd">
+</span>
+TEST(TRUCKTEST, BOSCH_TOYOTA_CONTINENTAL)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, TOYOTA, CONTINENTAL, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(TRUCKTEST, BOSCH_TOYOTA_BOSCH)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, TOYOTA, BOSCH_B, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(TRUCKTEST, BOSCH_WIA_MANDO)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, WIA, MANDO, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(TRUCKTEST, BOSCH_WIA_CONTINENTAL)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, WIA, CONTINENTAL, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(TRUCKTEST, BOSCH_WIA_BOSCH)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, WIA, BOSCH_B, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+<span style = "background-color:#dfd">}
+</span>
+TEST(TRUCKTEST, BOSCH_BROKEN_BOSCH)
+<span style = "background-color:#dfd">{</span>
+	//Steering - Engine - Brake - Type
+	Car mycar(BOSCH_S, BROKEN, BOSCH_B, TRUCK);
+	ValidCheck valid;
+<span style = "background-color:#dfd">	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);</span>
+	EXPECT_TRUE(valid.isValidCheck(mycar));
+}
+
+
+
+
+#endif</pre>
+        <hr />
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th align="center">
+                        <small>Generated by</small>
+                        <a href="https://github.com/OpenCppCoverage/OpenCppCoverage/releases">
+                            <strong>OpenCppCoverage (Version: 0.9.9.0)</strong>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </body>
+</html>
