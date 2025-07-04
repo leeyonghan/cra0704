@@ -32,128 +32,14 @@ bool backtoInit(int& step, int answer);
 bool backtoBefore(int& step, int answer);
 void goNextStep(int& step, int answer);
 void getInput(char* buf);
-
-void delay(int ms)
-{
-    volatile int sum = 0;
-    for (int i = 0; i < 1000; i++)
-    {
-        for (int j = 0; j < 1000; j++)
-        {
-            for (int t = 0; t < ms; t++)
-            {
-                sum++;
-            }
-        }
-    }
-}
-
-void printCarTypemenu()
-{
-    printf(CLEAR_SCREEN);
-
-    printf("        ______________\n");
-    printf("       /|            | \n");
-    printf("  ____/_|_____________|____\n");
-    printf(" |                      O  |\n");
-    printf(" '-(@)----------------(@)--'\n");
-    printf("===============================\n");
-    printf("어떤 차량 타입을 선택할까요?\n");
-    printf("1. Sedan\n");
-    printf("2. SUV\n");
-    printf("3. Truck\n");
-}
-void printEnginemenu()
-{
-    printf(CLEAR_SCREEN);
-    printf("어떤 엔진을 탑재할까요?\n");
-    printf("0. 뒤로가기\n");
-    printf("1. GM\n");
-    printf("2. TOYOTA\n");
-    printf("3. WIA\n");
-    printf("4. 고장난 엔진\n");
-}
-void printBreakSystemmenu()
-{
-    printf(CLEAR_SCREEN);
-    printf("어떤 제동장치를 선택할까요?\n");
-    printf("0. 뒤로가기\n");
-    printf("1. MANDO\n");
-    printf("2. CONTINENTAL\n");
-    printf("3. BOSCH\n");
-}
-void printSteeringSystemmenu()
-{
-    printf(CLEAR_SCREEN);
-    printf("어떤 조향장치를 선택할까요?\n");
-    printf("0. 뒤로가기\n");
-    printf("1. BOSCH\n");
-    printf("2. MOBIS\n");
-}
-void printRunTest()
-{
-    printf(CLEAR_SCREEN);
-    printf("멋진 차량이 완성되었습니다.\n");
-    printf("어떤 동작을 할까요?\n");
-    printf("0. 처음 화면으로 돌아가기\n");
-    printf("1. RUN\n");
-    printf("2. Test\n");
-}
-void printStepMessage(int step)
-{
-    if (step == CarType_Q)
-    {
-        printCarTypemenu();
-    }
-    else if (step == Engine_Q)
-    {
-        printEnginemenu();
-    }
-    else if (step == brakeSystem_Q)
-    {
-        printBreakSystemmenu();;
-    }
-    else if (step == SteeringSystem_Q)
-    {
-        printSteeringSystemmenu();
-    }
-    else if (step == Run_Test)
-    {
-        printRunTest();
-    }
-    printf("===============================\n");
-
-}
-bool eraseNewlineChar(char* buf)
-{
-    char* context = nullptr;
-    strtok_s(buf, "\r", &context);
-    strtok_s(buf, "\n", &context);
-
-    if (!strcmp(buf, "exit"))
-    {
-        printf("바이바이\n");
-        return false;// break;
-    }
-    return true;
-}
-bool isNumber(char* buf, int &answer)
-{
-    // 숫자로 된 대답인지 확인
-
-    char* checkNumber;
-    answer = strtol(buf, &checkNumber, 10); // 문자열을 10진수로 변환
-
-    // 입력받은 문자가 숫자가 아니라면
-    if (*checkNumber != '\0')
-    {
-        printf("ERROR :: 숫자만 입력 가능\n");
-        delay(800);
-        return false;
-    }
-    return true;
-
-}
+void printCarTypemenu();
+void printEnginemenu();
+void printBreakSystemmenu();
+void printSteeringSystemmenu();
+void printRunTest();
+void printStepMessage(int step);
+bool eraseNewlineChar(char* buf);
+bool isNumber(char* buf, int& answer);
 
 int main()
 {
@@ -452,6 +338,129 @@ void getInput(char* buf)
 {
     printf("INPUT > ");
     fgets(buf, sizeof(buf), stdin);
+
+}
+
+
+void delay(int ms)
+{
+    volatile int sum = 0;
+    for (int i = 0; i < 1000; i++)
+    {
+        for (int j = 0; j < 1000; j++)
+        {
+            for (int t = 0; t < ms; t++)
+            {
+                sum++;
+            }
+        }
+    }
+}
+
+void printCarTypemenu()
+{
+    printf(CLEAR_SCREEN);
+
+    printf("        ______________\n");
+    printf("       /|            | \n");
+    printf("  ____/_|_____________|____\n");
+    printf(" |                      O  |\n");
+    printf(" '-(@)----------------(@)--'\n");
+    printf("===============================\n");
+    printf("어떤 차량 타입을 선택할까요?\n");
+    printf("1. Sedan\n");
+    printf("2. SUV\n");
+    printf("3. Truck\n");
+}
+void printEnginemenu()
+{
+    printf(CLEAR_SCREEN);
+    printf("어떤 엔진을 탑재할까요?\n");
+    printf("0. 뒤로가기\n");
+    printf("1. GM\n");
+    printf("2. TOYOTA\n");
+    printf("3. WIA\n");
+    printf("4. 고장난 엔진\n");
+}
+void printBreakSystemmenu()
+{
+    printf(CLEAR_SCREEN);
+    printf("어떤 제동장치를 선택할까요?\n");
+    printf("0. 뒤로가기\n");
+    printf("1. MANDO\n");
+    printf("2. CONTINENTAL\n");
+    printf("3. BOSCH\n");
+}
+void printSteeringSystemmenu()
+{
+    printf(CLEAR_SCREEN);
+    printf("어떤 조향장치를 선택할까요?\n");
+    printf("0. 뒤로가기\n");
+    printf("1. BOSCH\n");
+    printf("2. MOBIS\n");
+}
+void printRunTest()
+{
+    printf(CLEAR_SCREEN);
+    printf("멋진 차량이 완성되었습니다.\n");
+    printf("어떤 동작을 할까요?\n");
+    printf("0. 처음 화면으로 돌아가기\n");
+    printf("1. RUN\n");
+    printf("2. Test\n");
+}
+void printStepMessage(int step)
+{
+    if (step == CarType_Q)
+    {
+        printCarTypemenu();
+    }
+    else if (step == Engine_Q)
+    {
+        printEnginemenu();
+    }
+    else if (step == brakeSystem_Q)
+    {
+        printBreakSystemmenu();;
+    }
+    else if (step == SteeringSystem_Q)
+    {
+        printSteeringSystemmenu();
+    }
+    else if (step == Run_Test)
+    {
+        printRunTest();
+    }
+    printf("===============================\n");
+
+}
+bool eraseNewlineChar(char* buf)
+{
+    char* context = nullptr;
+    strtok_s(buf, "\r", &context);
+    strtok_s(buf, "\n", &context);
+
+    if (!strcmp(buf, "exit"))
+    {
+        printf("바이바이\n");
+        return false;// break;
+    }
+    return true;
+}
+bool isNumber(char* buf, int& answer)
+{
+    // 숫자로 된 대답인지 확인
+
+    char* checkNumber;
+    answer = strtol(buf, &checkNumber, 10); // 문자열을 10진수로 변환
+
+    // 입력받은 문자가 숫자가 아니라면
+    if (*checkNumber != '\0')
+    {
+        printf("ERROR :: 숫자만 입력 가능\n");
+        delay(800);
+        return false;
+    }
+    return true;
 
 }
 
