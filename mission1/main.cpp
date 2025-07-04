@@ -257,7 +257,6 @@ bool isValidCheck()
     {
         return true;
     }
-    return true;
 }
 void printCarType()
 {
