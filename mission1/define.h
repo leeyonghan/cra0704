@@ -20,7 +20,8 @@ enum Engine
 {
     GM = 1,
     TOYOTA,
-    WIA
+    WIA,
+    BROKEN
 };
 
 enum brakeSystem
