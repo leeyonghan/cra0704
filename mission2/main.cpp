@@ -18,6 +18,7 @@ int main()
 #include"TestProducer.h"
 #include"ValidCheck.h"
 #include"runProducerCar.h"
+#include"Builder.h"
 #define CLEAR_SCREEN "\033[H\033[2J"
 
 int stack[10];
@@ -354,7 +355,8 @@ void goNextStep(int& step, int answer)
     }
     else if (step == Run_Test)
     {
-        Car mycar(static_cast<SteeringSystem>(stack[SteeringSystem_Q]), static_cast<Engine>(stack[Engine_Q]), static_cast<brakeSystem>(stack[brakeSystem_Q]), static_cast<CarType>(stack[CarType_Q]));
+        Car* mycar = builder().steeringsystem(static_cast<SteeringSystem>(stack[SteeringSystem_Q])).enginesystem(static_cast<Engine>(stack[Engine_Q])).brakesystem(static_cast<brakeSystem>(stack[brakeSystem_Q])).typesystem(static_cast<CarType>(stack[CarType_Q])).build();
+
         if (answer == 1)
         {
             RunProducer runproducer;

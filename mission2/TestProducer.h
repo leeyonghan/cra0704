@@ -6,6 +6,6 @@ class TestProducer
 {
 public:
 
-    void testProducedCar(Car mycar);
+    void testProducedCar(Car* mycar);
 };
 

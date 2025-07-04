@@ -6,9 +6,9 @@ class RunProducer
 {
 public:
 
-    void printCarType(Car mycar);
-    void printEngine(Car mycar);
-    void printbrakeSystem(Car mycar);
-    void printSteeringSystem(Car mycar);
-    void runProducedCar(Car mycar);
+    void printCarType(Car* mycar);
+    void printEngine(Car* mycar);
+    void printbrakeSystem(Car* mycar);
+    void printSteeringSystem(Car* mycar);
+    void runProducedCar(Car* mycar);
 };

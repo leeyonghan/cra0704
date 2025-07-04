@@ -4,6 +4,6 @@
 class ValidCheck
 {
 public:
-    bool isValidCheck(Car mycar);
+    bool isValidCheck(Car* mycar);
     
 };

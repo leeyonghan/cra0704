@@ -5,6 +5,7 @@
 #include"TestProducer.h"
 #include"ValidCheck.h"
 #include"runProducerCar.h"
+#include"Builder.h"
 TEST(t1, tc1) {
 	EXPECT_EQ(1, 1);
 }
@@ -22,12 +23,12 @@ GM/TOYOTA/WIA/Broken
 Brake
 MANDO/Continental/Bosch
 
-
 */
+
 TEST(SEDANTEST, Mobis_GM_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(MOBIS, GM, MANDO, SEDAN);
+	Car* mycar = builder().steeringsystem(MOBIS).enginesystem(GM).brakesystem(MANDO).typesystem(SEDAN).build();
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -39,7 +40,8 @@ TEST(SEDANTEST, Mobis_GM_MANDO)
 TEST(SUVTEST, Mobis_GM_BOSCH_B)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(MOBIS, GM, BOSCH_B, SUV);
+	Car* mycar = builder().steeringsystem(MOBIS).enginesystem(GM).brakesystem(BOSCH_B).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -52,7 +54,8 @@ TEST(SUVTEST, Mobis_GM_BOSCH_B)
 TEST(SEDANTEST, BOSCH_GM_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, GM, MANDO, SEDAN);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(GM).brakesystem(MANDO).typesystem(SEDAN).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -64,7 +67,8 @@ TEST(SEDANTEST, BOSCH_GM_MANDO)
 TEST(SEDANTEST, BOSCH_GM_Continental)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, GM, CONTINENTAL, SEDAN);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(GM).brakesystem(CONTINENTAL).typesystem(SEDAN).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -75,7 +79,8 @@ TEST(SEDANTEST, BOSCH_GM_Continental)
 TEST(SEDANTEST, BOSCH_GM_Bosch)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, GM, BOSCH_B, SEDAN);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(GM).brakesystem(BOSCH_B).typesystem(SEDAN).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -88,7 +93,8 @@ TEST(SEDANTEST, BOSCH_GM_Bosch)
 TEST(SEDANTEST, BOSCH_TOYOTA_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, TOYOTA, MANDO, SEDAN);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(TOYOTA).brakesystem(MANDO).typesystem(SEDAN).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -98,22 +104,12 @@ TEST(SEDANTEST, BOSCH_TOYOTA_MANDO)
 }
 
 
-TEST(SEDANTEST, BOSCH_TOYOTA_CONTINENTAL)
-{
-	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, TOYOTA, CONTINENTAL, SEDAN);
-	ValidCheck valid;
-	RunProducer runproducer;
-	TestProducer testproducer;
-	runproducer.runProducedCar(mycar);
-	testproducer.testProducedCar(mycar);
-	EXPECT_FALSE(valid.isValidCheck(mycar));
-}
 
 TEST(SEDANTEST, BOSCH_TOYOTA_BOSCH)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, TOYOTA, BOSCH_B, SEDAN);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(TOYOTA).brakesystem(BOSCH_B).typesystem(SEDAN).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -125,7 +121,8 @@ TEST(SEDANTEST, BOSCH_TOYOTA_BOSCH)
 TEST(SEDANTEST, BOSCH_WIA_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, WIA, MANDO, SEDAN);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(WIA).brakesystem(MANDO).typesystem(SEDAN).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -137,7 +134,7 @@ TEST(SEDANTEST, BOSCH_WIA_MANDO)
 TEST(SEDANTEST, BOSCH_WIA_CONTINENTAL)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, WIA, CONTINENTAL, SEDAN);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(WIA).brakesystem(CONTINENTAL).typesystem(SEDAN).build();
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -149,7 +146,8 @@ TEST(SEDANTEST, BOSCH_WIA_CONTINENTAL)
 TEST(SEDANTEST, BOSCH_WIA_BOSCH)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, WIA, BOSCH_B, SEDAN);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(WIA).brakesystem(BOSCH_B).typesystem(SEDAN).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -161,7 +159,8 @@ TEST(SEDANTEST, BOSCH_WIA_BOSCH)
 TEST(SEDANTEST, BOSCH_BROKEN_BOSCH)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, BROKEN, BOSCH_B, SEDAN);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(BROKEN).brakesystem(BOSCH_B).typesystem(SEDAN).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -175,7 +174,8 @@ TEST(SEDANTEST, BOSCH_BROKEN_BOSCH)
 TEST(SUVTEST, BOSCH_GM_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, GM, MANDO, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(GM).brakesystem(MANDO).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -187,7 +187,8 @@ TEST(SUVTEST, BOSCH_GM_MANDO)
 TEST(SUVTEST, BOSCH_GM_Continental)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, GM, CONTINENTAL, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(GM).brakesystem(CONTINENTAL).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -198,7 +199,8 @@ TEST(SUVTEST, BOSCH_GM_Continental)
 TEST(SUVTEST, BOSCH_GM_Bosch)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, GM, BOSCH_B, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(GM).brakesystem(BOSCH_B).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -211,7 +213,8 @@ TEST(SUVTEST, BOSCH_GM_Bosch)
 TEST(SUVTEST, BOSCH_TOYOTA_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, TOYOTA, MANDO, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(TOYOTA).brakesystem(MANDO).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -224,7 +227,8 @@ TEST(SUVTEST, BOSCH_TOYOTA_MANDO)
 TEST(SUVTEST, BOSCH_TOYOTA_CONTINENTAL)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, TOYOTA, CONTINENTAL, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(TOYOTA).brakesystem(CONTINENTAL).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -236,7 +240,8 @@ TEST(SUVTEST, BOSCH_TOYOTA_CONTINENTAL)
 TEST(SUVTEST, BOSCH_TOYOTA_BOSCH)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, TOYOTA, BOSCH_B, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(TOYOTA).brakesystem(BOSCH_B).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -248,7 +253,8 @@ TEST(SUVTEST, BOSCH_TOYOTA_BOSCH)
 TEST(SUVTEST, BOSCH_WIA_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, WIA, MANDO, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(WIA).brakesystem(MANDO).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -260,7 +266,7 @@ TEST(SUVTEST, BOSCH_WIA_MANDO)
 TEST(SUVTEST, BOSCH_WIA_CONTINENTAL)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, WIA, CONTINENTAL, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(WIA).brakesystem(CONTINENTAL).typesystem(SUV).build();
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -272,7 +278,8 @@ TEST(SUVTEST, BOSCH_WIA_CONTINENTAL)
 TEST(SUVTEST, BOSCH_WIA_BOSCH)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, WIA, BOSCH_B, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(WIA).brakesystem(BOSCH_B).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -284,7 +291,8 @@ TEST(SUVTEST, BOSCH_WIA_BOSCH)
 TEST(SUVTEST, BOSCH_BROKEN_BOSCH)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, BROKEN, BOSCH_B, SUV);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(BROKEN).brakesystem(BOSCH_B).typesystem(SUV).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -300,7 +308,8 @@ TEST(SUVTEST, BOSCH_BROKEN_BOSCH)
 TEST(TRUCKTEST, BOSCH_GM_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, GM, MANDO, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(GM).brakesystem(MANDO).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -312,7 +321,8 @@ TEST(TRUCKTEST, BOSCH_GM_MANDO)
 TEST(TRUCKTEST, BOSCH_GM_Continental)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, GM, CONTINENTAL, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(GM).brakesystem(CONTINENTAL).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -323,7 +333,8 @@ TEST(TRUCKTEST, BOSCH_GM_Continental)
 TEST(TRUCKTEST, BOSCH_GM_Bosch)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, GM, BOSCH_B, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(GM).brakesystem(BOSCH_B).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -336,7 +347,8 @@ TEST(TRUCKTEST, BOSCH_GM_Bosch)
 TEST(TRUCKTEST, BOSCH_TOYOTA_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, TOYOTA, MANDO, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(TOYOTA).brakesystem(MANDO).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -349,7 +361,8 @@ TEST(TRUCKTEST, BOSCH_TOYOTA_MANDO)
 TEST(TRUCKTEST, BOSCH_TOYOTA_CONTINENTAL)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, TOYOTA, CONTINENTAL, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(TOYOTA).brakesystem(CONTINENTAL).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -361,7 +374,8 @@ TEST(TRUCKTEST, BOSCH_TOYOTA_CONTINENTAL)
 TEST(TRUCKTEST, BOSCH_TOYOTA_BOSCH)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, TOYOTA, BOSCH_B, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(TOYOTA).brakesystem(BOSCH_B).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -373,7 +387,8 @@ TEST(TRUCKTEST, BOSCH_TOYOTA_BOSCH)
 TEST(TRUCKTEST, BOSCH_WIA_MANDO)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, WIA, MANDO, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(WIA).brakesystem(MANDO).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -385,7 +400,8 @@ TEST(TRUCKTEST, BOSCH_WIA_MANDO)
 TEST(TRUCKTEST, BOSCH_WIA_CONTINENTAL)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, WIA, CONTINENTAL, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(WIA).brakesystem(CONTINENTAL).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -397,7 +413,8 @@ TEST(TRUCKTEST, BOSCH_WIA_CONTINENTAL)
 TEST(TRUCKTEST, BOSCH_WIA_BOSCH)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, WIA, BOSCH_B, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(WIA).brakesystem(BOSCH_B).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -409,7 +426,8 @@ TEST(TRUCKTEST, BOSCH_WIA_BOSCH)
 TEST(TRUCKTEST, BOSCH_BROKEN_BOSCH)
 {
 	//Steering - Engine - Brake - Type
-	Car mycar(BOSCH_S, BROKEN, BOSCH_B, TRUCK);
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(BROKEN).brakesystem(BOSCH_B).typesystem(TRUCK).build();
+
 	ValidCheck valid;
 	RunProducer runproducer;
 	TestProducer testproducer;
@@ -420,5 +438,17 @@ TEST(TRUCKTEST, BOSCH_BROKEN_BOSCH)
 
 
 
+TEST(SEDANTEST, BOSCH_TOYOTA_CONTINENTAL)
+{
+	//Steering - Engine - Brake - Type
+
+	Car* mycar = builder().steeringsystem(BOSCH_S).enginesystem(TOYOTA).brakesystem(CONTINENTAL).typesystem(SEDAN).build();
+	ValidCheck valid;
+	RunProducer runproducer;
+	TestProducer testproducer;
+	runproducer.runProducedCar(mycar);
+	testproducer.testProducedCar(mycar);
+	EXPECT_FALSE(valid.isValidCheck(mycar));
+}
 
 #endif
