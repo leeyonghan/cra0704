@@ -27,6 +27,11 @@ void testProducedCar();
 void delay(int ms);
 void printStepMessage(int step);
 bool eraseNewlineChar(char* buf);
+bool checkPossibleRange(int step, int answer);
+bool backtoInit(int& step, int answer);
+bool backtoBefore(int& step, int answer);
+void goNextStep(int& step, int answer);
+void getInput(char* buf);
 
 void delay(int ms)
 {
@@ -43,7 +48,7 @@ void delay(int ms)
     }
 }
 
-void printCarType()
+void printCarTypemenu()
 {
     printf(CLEAR_SCREEN);
 
@@ -58,7 +63,7 @@ void printCarType()
     printf("2. SUV\n");
     printf("3. Truck\n");
 }
-void printEngine()
+void printEnginemenu()
 {
     printf(CLEAR_SCREEN);
     printf("어떤 엔진을 탑재할까요?\n");
@@ -68,7 +73,7 @@ void printEngine()
     printf("3. WIA\n");
     printf("4. 고장난 엔진\n");
 }
-void printBreakSystem()
+void printBreakSystemmenu()
 {
     printf(CLEAR_SCREEN);
     printf("어떤 제동장치를 선택할까요?\n");
@@ -77,7 +82,7 @@ void printBreakSystem()
     printf("2. CONTINENTAL\n");
     printf("3. BOSCH\n");
 }
-void printSteeringSystem()
+void printSteeringSystemmenu()
 {
     printf(CLEAR_SCREEN);
     printf("어떤 조향장치를 선택할까요?\n");
@@ -98,19 +103,19 @@ void printStepMessage(int step)
 {
     if (step == CarType_Q)
     {
-        printCarType();
+        printCarTypemenu();
     }
     else if (step == Engine_Q)
     {
-        printEngine();
+        printEnginemenu();
     }
     else if (step == brakeSystem_Q)
     {
-        printBreakSystem();;
+        printBreakSystemmenu();;
     }
     else if (step == SteeringSystem_Q)
     {
-        printSteeringSystem();
+        printSteeringSystemmenu();
     }
     else if (step == Run_Test)
     {
@@ -149,11 +154,6 @@ bool isNumber(char* buf, int &answer)
     return true;
 
 }
-bool checkPossibleRange(int step, int answer);
-bool backtoInit(int& step, int answer);
-bool backtoBefore(int& step, int answer);
-void goNextStep(int& step, int answer);
-void getInput(char* buf);
 
 int main()
 {
@@ -187,7 +187,6 @@ int main()
         goNextStep(step, answer);
     }
 }
-
 
 
 void selectCarType(int answer)
@@ -260,7 +259,40 @@ int isValidCheck()
     }
     return true;
 }
-
+void printCarType()
+{
+    if (stack[CarType_Q] == 1)
+        printf("Car Type : Sedan\n");
+    if (stack[CarType_Q] == 2)
+        printf("Car Type : SUV\n");
+    if (stack[CarType_Q] == 3)
+        printf("Car Type : Truck\n");
+}
+void printEngine()
+{
+    if (stack[Engine_Q] == 1)
+        printf("Engine : GM\n");
+    if (stack[Engine_Q] == 2)
+        printf("Engine : TOYOTA\n");
+    if (stack[Engine_Q] == 3)
+        printf("Engine : WIA\n");
+}
+void printbrakeSystem()
+{
+    if (stack[brakeSystem_Q] == 1)
+        printf("Brake System : Mando");
+    if (stack[brakeSystem_Q] == 2)
+        printf("Brake System : Continental\n");
+    if (stack[brakeSystem_Q] == 3)
+        printf("Brake System : Bosch\n");
+}
+void printSteeringSystem()
+{
+    if (stack[SteeringSystem_Q] == 1)
+        printf("SteeringSystem : Bosch\n");
+    if (stack[SteeringSystem_Q] == 2)
+        printf("SteeringSystem : Mobis\n");
+}
 void runProducedCar()
 {
     if (isValidCheck() == false)
@@ -276,29 +308,10 @@ void runProducedCar()
         }
         else
         {
-            if (stack[CarType_Q] == 1)
-                printf("Car Type : Sedan\n");
-            if (stack[CarType_Q] == 2)
-                printf("Car Type : SUV\n");
-            if (stack[CarType_Q] == 3)
-                printf("Car Type : Truck\n");
-            if (stack[Engine_Q] == 1)
-                printf("Engine : GM\n");
-            if (stack[Engine_Q] == 2)
-                printf("Engine : TOYOTA\n");
-            if (stack[Engine_Q] == 3)
-                printf("Engine : WIA\n");
-            if (stack[brakeSystem_Q] == 1)
-                printf("Brake System : Mando");
-            if (stack[brakeSystem_Q] == 2)
-                printf("Brake System : Continental\n");
-            if (stack[brakeSystem_Q] == 3)
-                printf("Brake System : Bosch\n");
-            if (stack[SteeringSystem_Q] == 1)
-                printf("SteeringSystem : Bosch\n");
-            if (stack[SteeringSystem_Q] == 2)
-                printf("SteeringSystem : Mobis\n");
-
+            printCarType();
+            printEngine();
+            printbrakeSystem();
+            printSteeringSystem();
             printf("자동차가 동작됩니다.\n");
         }
     }
@@ -442,4 +455,5 @@ void getInput(char* buf)
     fgets(buf, sizeof(buf), stdin);
 
 }
+
 #endif
